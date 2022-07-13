@@ -1,0 +1,210 @@
+PL/SQL:
+1)Anonymous Block -- its not stored in database, just executable.
+2)Named Block -- its stored in database, for reteriving the data multiple times.
+	prodcures
+
+PRODUCURE:
+
+SYNTAX:--
+CREATE OR REPLACE PROCEDURE EMP_PROCEDURE
+IS
+V_EMP EMPDATA %ROWTYPE;
+BEGIN
+
+SELECT * INTO V_EMP FROM EMPDATA WHERE EID=111;
+
+DBMS_OUTPUT.PUT_LINE('EMPLOYEE NAME: '|| V_EMP.ENAME);
+DBMS_OUTPUT.PUT_LINE('EMPLOYEE ID: '|| V_EMP.EID);
+DBMS_OUTPUT.PUT_LINE('EMPLOYEE EMAIL: '|| V_EMP.EMAIL);
+DBMS_OUTPUT.PUT_LINE('EMPLOYEE SALARY: '|| V_EMP.ESALARY);
+
+END;
+--------------------------------------------------------
+	Functions
+	packages
+	Triggers
+-----------------------------------
+TRIGGER:
+
+SYNTAX:--CREATE OR REPLACE TRIGGER EMPDATA_TRIG 
+AFTER 
+UPDATE OR DELETE 
+ON EMPDATA 
+FOR EACH ROW 
+BEGIN 
+ 
+DBMS_OUTPUT.PUT_LINE('EMPDATA TABLE IS UPDATED OR DELETED'); 
+ 
+END;
+-----------------------------------------------
+
+Anonymous Block:(LIKE SYNTAX)
+
+DECLARE
+syntax:-(variable_name data_type)
+	Variable declare -- OPTIONAL
+Assignment operator:
+	:=
+BEGIN
+
+	Executable statement -- MANDATORY
+	
+	Exception handling -- OPTIONAL
+
+END;
+
+DML Operations in PLSQL:
+1) Select statement
+2) Insert statement
+3) Update statement
+4) Delete statement
+
+Exercise:
+first create a table
+
+CREATE TABLE "EMPDATA"(  
+"ENAME" VARCHAR(25),  
+"EID" INTEGER NOT NULL UNIQUE,  
+"EMAIL" VARCHAR(25) NOT NULL,  
+"EADDRESS" VARCHAR(50) UNIQUE)
+ then,
+
+DECLARE 
+ 
+V_ENAME VARCHAR(30); 
+ 
+V_EADDRESS VARCHAR(30); 
+ 
+BEGIN 
+ 
+INSERT INTO EMPDATA(ENAME, EID, EMAIL, EADDRESS) 
+VALUES ('RAJESH', 111, 'RK@GMAIL.COM','KARAIKAL'); 
+ 
+INSERT INTO EMPDATA(ENAME, EID, EMAIL, EADDRESS) 
+VALUES ('SKANDA', 112, 'SK@GMAIL.COM','PONDICHERRY'); 
+ 
+UPDATE EMPDATA 
+SET ENAME = 'RAJESH KANNAN' WHERE EID = 111; 
+ 
+DELETE FROM EMPDATA WHERE EID=112; 
+COMMIT; 
+ 
+SELECT ENAME,EADDRESS INTO V_ENAME,V_EADDRESS FROM EMPDATA WHERE EID=111; 
+DBMS_OUTPUT.PUT_LINE('NAME OF THE EMPLOYEE: '|| V_ENAME); 
+DBMS_OUTPUT.PUT_LINE('NAME OF THE EADDRESS: '|| V_EADDRESS); 
+ 
+END;
+-------------------------------------------------------------------------------
+PL SQL IF THEN ELSE STATEMENT:
+
+IF conditin THEN
+statement;
+END IF;
+
+IF conditin THEN
+statement;
+ELSE
+else-statement;
+END IF;
+
+
+
+CASE:
+case
+when condition1 then
+statement1
+when condition2 then
+statement2
+when condition3 then
+statement3
+else
+else-statement
+end case;
+---------------------------
+LOOPING STATEMENT:
+Simple Loop
+while loop
+simple for loop
+cursor for loop
+
+SIMPLE LOOP:--syntax
+
+Declare
+C number:=1;
+begin
+loop
+executable statement(dbms_output.put_line('');
+C:=C+1;
+exit when C>5;
+end loop;
+end;
+
+WHILE LOOP: --SYNTAX
+
+Declare
+c number:=1;
+begin
+while(c<=5)
+loop
+statement-- (dbms_output.put_line('');
+condition--c:c+1;
+end loop;
+end;
+
+FOR LOOP:--SYNTAX
+
+Declare
+index number;
+begin
+for index in [reverse] 1..5
+loop
+dbms_output.put_line('');
+end loop;
+end;
+---------------------------------------
+Rename the table_name:
+syntax-- rename oldtablename to new tablename;
+rename customer to customer_bkp;
+
+insert:
+syntax:-- insert into customer(select*from customer_bkp);
+----------------------------------------------
+
+Anchored datatype in pl/sql:
+ 1) %TYPE ATTRIBUTE
+SYNTAX:- variable_name tablename.column_name%TYPE;
+2) % ROWTYPE
+SYNTAX:- variable_name tablename%rowtype;
+------------------------------------------------------
+1)%TYPE:
+
+DECLARE
+
+V_ESALARY EMPDATA.ESALARY%TYPE;
+V_EID EMPDATA.ESALARY%TYPE := 112;
+
+BEGIN
+
+SELECT ESALARY INTO V_ESALARY FROM EMPDATA WHERE EID = V_EID;
+
+DBMS_OUTPUT.PUT_LINE('ESALARY OF EMPLOYEE'||V_EID||' '||'IS'||' '||V_ESALARY);
+
+END;
+
+2)%ROW TYPE:
+
+DECLARE
+
+V_EMP EMPDATA %rowtype;
+
+BEGIN
+
+SELECT * INTO V_EMP FROM EMPDATA WHERE EID=112;
+
+DBMS_OUTPUT.PUT_LINE(V_EMP.ENAME);
+DBMS_OUTPUT.PUT_LINE(V_EMP.EID);
+DBMS_OUTPUT.PUT_LINE(V_EMP.ESALARY);
+
+
+END;
+

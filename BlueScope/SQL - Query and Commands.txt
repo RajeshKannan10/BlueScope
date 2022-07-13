@@ -1,0 +1,69 @@
+DataBase CReation:
+CREATE DATABASE databasename;
+create database Employee;
+
+DDL:
+
+Table Creation:
+create table "Employee" (
+	"EID" INTEGER NOT NULL UNIQUE,
+	"ENAME" TEXT NOT NULL,
+	"ADDRESS" TEXT,);
+
+Alter table details:
+Alter table table_name;
+ADD column_name datatype;
+
+Alter Table Employee
+ADD proof text; 
+
+Drop column column_name:
+Alter Table Employee
+Drop proof text;
+
+Alter column detail:
+ALTER TABLE table_name
+ALTER COLUMN column_name datatype;
+
+Alter table Employee
+alter column Eid text;
+
+DML:
+
+INSERT:
+Insert into Employee(EID, EName, Address)
+values (123, 'rajesh', 'karaikal');
+
+UPDATE:
+Update Employee
+SET Ename = 'rajesh kannan',address = 'karaikal'
+where EID = 123;
+
+DELETE:
+Delete From table_name WHERE condition;
+Delete From Employee Where EID = 123;
+
+Drop table table_name: - for delete the table in database
+Drop table Employee;
+
+Truncate table table_name:- for delete only content of the table
+Truncate table Employee;
+
+joins in sql table:
+1) Inner join:- (it gives only matched items in the tables)
+SELECT * FROM Table1_name INNER JOIN Table2_name ON table1.Eid=table2_name.Eid;
+
+2)Left join:
+SELECT * FROM Table1_name LEFT JOIN Table2_name ON table1.Eid=table2_name.Eid;
+
+3)Right join:
+SELECT * FROM Table1_name RIGHT JOIN Table2_name ON table1.Eid=table2_name.Eid;
+
+4)Full outer join:
+SELECT * FROM Table1_name FULL OUTER JOIN Table2_name ON table1.Eid=table2_name.Eid;
+
+5)Cross join:
+SELECT * FROM Table1_name CROSS JOIN Table2_name;
+
+
+ 
